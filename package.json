@@ -1,39 +1,46 @@
 {
   "name": "react-tiny-modals",
-  "version": "1.2.1",
+  "version": "1.2.6",
   "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/janstaffa/react-tiny-modals.git"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "types": "dist/**/*.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "/dist"
+    "dist"
   ],
   "author": "janstaffa (https://github.com/janstaffa)",
   "bugs": {
     "url": "https://github.com/janstaffa/react-tiny-modals/issues"
   },
   "homepage": "https://github.com/janstaffa/react-tiny-modals#readme",
-  "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
-  },
-  "scripts": {
-    "watch": "tsc -w",
-    "watch-css": "sass ./src/index.scss ./dist/index.css -w"
-  },
-  "devDependencies": {
-    "rollup": "^2.48.0",
-    "rollup-plugin-scss": "^2.6.1",
-    "rollup-plugin-typescript2": "^0.30.0",
-    "typescript": "^4.2.4"
-  },
   "dependencies": {
-    "@types/react": "^17.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "watch": "tsc -w",
+    "watch:css": "sass ./src/index.scss ./dist/index.css -w"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
+    "typescript": "^4.2.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
