@@ -262,7 +262,7 @@
         "affectsGlobalScope": false
       },
       "./src/popup.tsx": {
-        "version": "75cb7072d72783a594f1146893fb86d20b5ae28b37eec6ad5110ea32fe5ddc70",
+        "version": "dd3fd4a401713d53f6b4a8965a929f9b134f3fd8af94f9874ef93de3a37ca159",
         "signature": "87871bdd7221a616341c32e165901b7efb998d594dd2b40ec8572d2ea50559b7",
         "affectsGlobalScope": false
       },

@@ -202,11 +202,13 @@ export const Popup: React.FC<PopupProps> = ({
   const childNodeRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (isOpen) onOpen?.();
-    if (!isOpen) onClose?.();
     setShow(isOpen);
   }, [isOpen]);
 
+  useEffect(() => {
+    if (show) onOpen?.();
+    if (!show) onClose?.();
+  }, [show]);
   const iStyles: React.CSSProperties = {
     ...innerStyle,
     zIndex,
