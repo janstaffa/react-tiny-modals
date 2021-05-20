@@ -9,7 +9,7 @@ type ContentType = ({
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }) => ReactNode;
-export type ModalProps = Pick<React.ComponentProps<'div'>, 'className'> & {
+export type PopupProps = Pick<React.ComponentProps<'div'>, 'className'> & {
   isOpen?: boolean;
   children: ({
     show,
@@ -21,7 +21,7 @@ export type ModalProps = Pick<React.ComponentProps<'div'>, 'className'> & {
   content: ContentType;
   zIndex?: number;
   innerStyle?: React.CSSProperties;
-  position:
+  position?:
     | 'left'
     | 'right'
     | 'top'
@@ -157,14 +157,14 @@ const Content: React.FC<ContentProps> = ({
   );
 };
 
-export const Popup: React.FC<ModalProps> = ({
+export const Popup: React.FC<PopupProps> = ({
   children,
   isOpen = false,
   content,
   zIndex = 100,
   className,
   innerStyle,
-  position,
+  position = ['left', 'right', 'top', 'bottom'],
   outerPadding,
   align = 'center',
   reposition = true,

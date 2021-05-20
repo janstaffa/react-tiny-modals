@@ -2,8 +2,8 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import './index.css';
 export type ModalProps = Pick<React.ComponentProps<'div'>, 'className'> & {
   isOpen?: boolean;
-  outerStyles?: React.CSSProperties;
-  innerStyles?: React.CSSProperties;
+  outerStyle?: React.CSSProperties;
+  innerStyle?: React.CSSProperties;
   children: ReactNode;
   zIndex?: number;
   backOpacity?: number;
@@ -14,8 +14,8 @@ export type ModalProps = Pick<React.ComponentProps<'div'>, 'className'> & {
 export const Modal: React.FC<ModalProps> = ({
   children,
   isOpen = false,
-  outerStyles,
-  innerStyles,
+  outerStyle,
+  innerStyle,
   zIndex = 100,
   className,
   backOpacity = 0.8,
@@ -30,20 +30,20 @@ export const Modal: React.FC<ModalProps> = ({
     setShow(isOpen);
   }, [isOpen]);
 
-  const oStyles: React.CSSProperties = {
-    ...outerStyles,
+  const oStyle: React.CSSProperties = {
+    ...outerStyle,
     zIndex,
     opacity: backOpacity,
   };
   return show ? (
     <div
       className={'react-tiny-modal' + (className ? className : '')}
-      style={oStyles}
+      style={oStyle}
       {...props}
     >
       <div
         className={'modal-center'}
-        style={innerStyles ? innerStyles : undefined}
+        style={innerStyle ? innerStyle : undefined}
       >
         {children}
       </div>
