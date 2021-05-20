@@ -1,5 +1,6 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import './index.css';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { modalCenterStyles, modalStyles } from './styles';
+
 export type ModalProps = Pick<React.ComponentProps<'div'>, 'className'> & {
   isOpen?: boolean;
   outerStyle?: React.CSSProperties;
@@ -9,6 +10,7 @@ export type ModalProps = Pick<React.ComponentProps<'div'>, 'className'> & {
   backOpacity?: number;
   onOpen?: () => void;
   onClose?: () => void;
+  onClickOutside?: () => void;
 };
 
 export const Modal: React.FC<ModalProps> = ({
@@ -21,6 +23,7 @@ export const Modal: React.FC<ModalProps> = ({
   backOpacity = 0.8,
   onOpen,
   onClose,
+  onClickOutside,
   ...props
 }) => {
   const [show, setShow] = useState<boolean>(isOpen);
@@ -30,21 +33,29 @@ export const Modal: React.FC<ModalProps> = ({
     setShow(isOpen);
   }, [isOpen]);
 
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  const handleClick = (e: MouseEvent) => {
+    if (!contentRef.current?.contains(e.target as Node | null)) {
+      onClickOutside?.();
+    }
+  };
+  useEffect(() => {
+    document?.addEventListener('click', handleClick);
+    return () => document?.removeEventListener('click', handleClick);
+  }, []);
   const oStyle: React.CSSProperties = {
     ...outerStyle,
     zIndex,
-    opacity: backOpacity,
+    backgroundColor: `rgba(0,0,0,${backOpacity})`,
   };
   return show ? (
     <div
-      className={'react-tiny-modal' + (className ? className : '')}
-      style={oStyle}
+      className={className ? className : ''}
+      style={{ ...modalStyles, ...oStyle }}
       {...props}
     >
-      <div
-        className={'modal-center'}
-        style={innerStyle ? innerStyle : undefined}
-      >
+      <div style={{ ...modalCenterStyles, ...innerStyle }} ref={contentRef}>
         {children}
       </div>
     </div>

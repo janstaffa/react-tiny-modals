@@ -246,9 +246,14 @@
         "signature": "881ea8e225320dd9b436999d82998e1d7699e512e0597f0015e5abd59d95974a",
         "affectsGlobalScope": true
       },
+      "./src/styles.ts": {
+        "version": "79b542c42010af1970e9b870fba79c47b78117d3bc4d043dae68e678b2ee2dc8",
+        "signature": "f38caec0acd8b2389b7435ecc5a20d0b1912dc75b0a77534d4fff52becd10f1e",
+        "affectsGlobalScope": false
+      },
       "./src/modal.tsx": {
-        "version": "79850b42644b9ac2b2d2d67585a9553419957815dbf81f7a93df63847af645b0",
-        "signature": "98f7dd718b731e093570856ed949f3041051f9ec1ce18cb987245136ac3f019f",
+        "version": "a46f74dd005e7a296bdf0f0c7d0a09fc633802603ab2f431c7aa4e7457e34b75",
+        "signature": "7e77da40fe7835f2304776beb3abfeb5d9db3512db23f176bed4fbe1fe7accf4",
         "affectsGlobalScope": false
       },
       "./src/utils.ts": {
@@ -257,8 +262,8 @@
         "affectsGlobalScope": false
       },
       "./src/popup.tsx": {
-        "version": "526bbc364206f40a87cee44d1821a20051114af8b66180f2084f552902b8d5ed",
-        "signature": "59ded74a269700bc92eb659799deab0a516f27e6d4a5e4c2104519850aa87605",
+        "version": "75cb7072d72783a594f1146893fb86d20b5ae28b37eec6ad5110ea32fe5ddc70",
+        "signature": "87871bdd7221a616341c32e165901b7efb998d594dd2b40ec8572d2ea50559b7",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -666,7 +671,7 @@
       "incremental": true,
       "outDir": "./dist",
       "target": 1,
-      "module": 99,
+      "module": 1,
       "lib": [
         "lib.dom.d.ts",
         "lib.esnext.d.ts"
@@ -1173,12 +1178,18 @@
       ],
       "./src/modal.tsx": [
         "../node_modules/tslib/tslib.d.ts",
-        "./node_modules/@types/react/index.d.ts"
+        "./node_modules/@types/react/index.d.ts",
+        "./src/styles.ts"
       ],
       "./src/popup.tsx": [
         "../node_modules/tslib/tslib.d.ts",
         "./node_modules/@types/react/index.d.ts",
+        "./src/styles.ts",
         "./src/utils.ts"
+      ],
+      "./src/styles.ts": [
+        "../node_modules/tslib/tslib.d.ts",
+        "./node_modules/@types/react/index.d.ts"
       ],
       "./src/utils.ts": [
         "../node_modules/tslib/tslib.d.ts"
@@ -1668,6 +1679,9 @@
       ],
       "./src/popup.tsx": [
         "./node_modules/@types/react/index.d.ts"
+      ],
+      "./src/styles.ts": [
+        "./node_modules/@types/react/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1802,6 +1816,7 @@
       "./src/index.ts",
       "./src/modal.tsx",
       "./src/popup.tsx",
+      "./src/styles.ts",
       "./src/utils.ts"
     ]
   },

@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import './index.css';
+import { popupContentStyles, popupStyles } from './styles';
 import { calcTranslate, checkBoundingBox } from './utils';
 
 type ContentType = ({
@@ -32,6 +32,13 @@ export type PopupProps = Pick<React.ComponentProps<'div'>, 'className'> & {
   reposition?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
+  onClickOutside?: ({
+    show,
+    setShow,
+  }: {
+    show: boolean;
+    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  }) => void;
 };
 
 export interface ContentProps {
@@ -50,6 +57,13 @@ export interface ContentProps {
   reposition: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   show: boolean;
+  onClickOutside?: ({
+    show,
+    setShow,
+  }: {
+    show: boolean;
+    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  }) => void;
 }
 
 const Content: React.FC<ContentProps> = ({
@@ -63,6 +77,7 @@ const Content: React.FC<ContentProps> = ({
   reposition,
   setShow,
   show,
+  onClickOutside,
   ...props
 }) => {
   const popupContentRef = useRef<HTMLDivElement | null>(null);
@@ -142,13 +157,21 @@ const Content: React.FC<ContentProps> = ({
 
       popupContentRef.current.style.transform = `translate(${left}px, ${top}px)`;
     }
+
+    const handleClick = (e: MouseEvent) => {
+      if (!popupContentRef.current?.contains(e.target as Node | null)) {
+        onClickOutside?.({ show, setShow });
+      }
+    };
+    document?.addEventListener('click', handleClick);
+    return () => document?.removeEventListener('click', handleClick);
   }, []);
 
   const contentNode = content({ setShow, show });
   return (
     <div
-      className={'popup-content' + (className ? className : '')}
-      style={iStyles}
+      className={className ? className : ''}
+      style={{ ...popupContentStyles, ...iStyles }}
       {...props}
       ref={popupContentRef}
     >
@@ -170,6 +193,7 @@ export const Popup: React.FC<PopupProps> = ({
   reposition = true,
   onOpen,
   onClose,
+  onClickOutside,
   ...props
 }) => {
   const [show, setShow] = useState<boolean>(isOpen);
@@ -188,7 +212,7 @@ export const Popup: React.FC<PopupProps> = ({
     zIndex,
   };
   return (
-    <div className="react-tiny-popup">
+    <div style={{ ...popupStyles }}>
       {show ? (
         <Content
           content={content}
@@ -201,12 +225,11 @@ export const Popup: React.FC<PopupProps> = ({
           reposition={reposition}
           setShow={setShow}
           show={show}
+          onClickOutside={onClickOutside}
           {...props}
         />
       ) : null}
-      <div className="popup-children" ref={childNodeRef}>
-        {childNode}
-      </div>
+      <div ref={childNodeRef}>{childNode}</div>
     </div>
   );
 };
