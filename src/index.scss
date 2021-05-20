@@ -2,11 +2,29 @@
   width: 100vw;
   height: 100vh;
   background-color: black;
-  opacity: 0.6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
 
   .modal-center {
-    width: 200px;
-    height: 200px;
-    background-color: red;
+    min-width: 200px;
+    min-height: 200px;
+  }
+}
+
+.react-tiny-popup {
+  position: relative;
+  vertical-align: middle;
+
+  .popup-content {
+    width: auto;
+    height: auto;
+    padding: 5px;
+    background-color: #333;
+    position: absolute;
   }
 }
