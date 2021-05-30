@@ -27,6 +27,9 @@ export const Modal: React.FC<ModalProps> = ({
   ...props
 }) => {
   const [show, setShow] = useState<boolean>(isOpen);
+  const showRef = useRef<boolean>(show);
+  showRef.current = show;
+
   useEffect(() => {
     if (isOpen) onOpen?.();
     if (!isOpen) onClose?.();
@@ -34,15 +37,20 @@ export const Modal: React.FC<ModalProps> = ({
   }, [isOpen]);
 
   const contentRef = useRef<HTMLDivElement | null>(null);
-
   const handleClick = (e: MouseEvent) => {
-    if (!contentRef.current?.contains(e.target as Node | null)) {
+    if (
+      !contentRef.current?.contains(e.target as Node | null) &&
+      showRef.current
+    ) {
       onClickOutside?.();
+      return;
     }
   };
   useEffect(() => {
-    document?.addEventListener('click', handleClick);
-    return () => document?.removeEventListener('click', handleClick);
+    if (window) {
+      window.addEventListener('click', handleClick);
+      return () => window.removeEventListener('click', handleClick);
+    }
   }, []);
   const oStyle: React.CSSProperties = {
     ...outerStyle,

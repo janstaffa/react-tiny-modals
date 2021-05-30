@@ -252,7 +252,7 @@
         "affectsGlobalScope": false
       },
       "./src/modal.tsx": {
-        "version": "a46f74dd005e7a296bdf0f0c7d0a09fc633802603ab2f431c7aa4e7457e34b75",
+        "version": "c59ab30dfd9bd224d25980b9cb2d5f848220fea52db1fc308cbb323039d22afa",
         "signature": "7e77da40fe7835f2304776beb3abfeb5d9db3512db23f176bed4fbe1fe7accf4",
         "affectsGlobalScope": false
       },
@@ -262,8 +262,8 @@
         "affectsGlobalScope": false
       },
       "./src/popup.tsx": {
-        "version": "1696cfce9ed4b7685c4facb49efe2d37dd0aa8a468beb25baf62abceceb63aca",
-        "signature": "87871bdd7221a616341c32e165901b7efb998d594dd2b40ec8572d2ea50559b7",
+        "version": "2d8e45814daa3d8f5e61b83b3806f5021e18fc9675fe4eec761e1dc97924ba02",
+        "signature": "02a32f16d3229ab6d28f2cd6a25f867a4829693e632208e7dcf82b5a3af0f976",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -683,7 +683,7 @@
       "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
-      "noImplicitReturns": true,
+      "noImplicitReturns": false,
       "noFallthroughCasesInSwitch": true,
       "allowJs": false,
       "jsx": 2,
