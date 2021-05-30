@@ -39,6 +39,7 @@ export type PopupProps = Pick<React.ComponentProps<'div'>, 'className'> & {
     show: boolean;
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
   }) => void;
+  closeOnClickOutside?: boolean;
 };
 
 export interface ContentProps {
@@ -64,6 +65,7 @@ export interface ContentProps {
     show: boolean;
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
   }) => void;
+  closeOnClickOutside: boolean;
 }
 
 const Content: React.FC<ContentProps> = ({
@@ -78,11 +80,13 @@ const Content: React.FC<ContentProps> = ({
   setShow,
   show,
   onClickOutside,
+  closeOnClickOutside,
   ...props
 }) => {
   const popupContentRef = useRef<HTMLDivElement | null>(null);
 
   let finalPosition: 'left' | 'right' | 'top' | 'bottom';
+
   useEffect(() => {
     if (popupContentRef.current) {
       const size = {
@@ -158,13 +162,24 @@ const Content: React.FC<ContentProps> = ({
       popupContentRef.current.style.transform = `translate(${left}px, ${top}px)`;
     }
 
-    const handleClick = (e: MouseEvent) => {
+    let handleClick: (e: MouseEvent) => void = (e) => {
       if (!popupContentRef.current?.contains(e.target as Node | null)) {
-        onClickOutside?.({ show, setShow });
+        if (closeOnClickOutside) {
+          setShow(false);
+          return;
+        }
+        onClickOutside?.({
+          show,
+          setShow,
+        });
       }
     };
-    document?.addEventListener('click', handleClick);
-    return () => document?.removeEventListener('click', handleClick);
+    if (window) {
+      window.addEventListener('click', handleClick, true);
+      return () => {
+        window.removeEventListener('click', handleClick, true);
+      };
+    }
   }, []);
 
   const contentNode = content({ setShow, show });
@@ -194,6 +209,7 @@ export const Popup: React.FC<PopupProps> = ({
   onOpen,
   onClose,
   onClickOutside,
+  closeOnClickOutside = false,
   ...props
 }) => {
   const [show, setShow] = useState<boolean>(isOpen);
@@ -228,6 +244,7 @@ export const Popup: React.FC<PopupProps> = ({
           setShow={setShow}
           show={show}
           onClickOutside={onClickOutside}
+          closeOnClickOutside={closeOnClickOutside}
           {...props}
         />
       ) : null}
